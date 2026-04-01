@@ -1,0 +1,108 @@
+{
+    "numerodespacho": "2000015778879292",
+    "fechadespacho": "2026-04-01",
+    "solicitudrecogida": {
+        "numero": null,
+        "fecha": "2026-04-01",
+        "ventanainicio": "2026-04-01T14:00:00",
+        "ventanafin": "2026-04-01T16:00:00"
+    },
+    "unidadnegocio": "1",
+    "cuentaremitente": "1485100",
+    "sederemitente": null,
+    "primernombreremitente": "",
+    "segundonombreremitente": "",
+    "primerapellidoremitente": "",
+    "segundoapellidoremitente": "",
+    "razonsocialremitente": "ABC CARGO EXPRESS SAS",
+    "contactoremitente": "",
+    "tipoidentificacionremitente": "NIT",
+    "identificacionremitente": "900174994-7",
+    "direccionremitente": "AVENIDA CALLE 24 # 95-12  BODEGA 45 PARQUE INDUSTRIAL PORTOS",
+    "ciudadorigen": "11001000",
+    "telefonoremitente": "3223817102",
+    "emailremitente": "EBLANCO@ABCCARGOEXPRESS.COM",
+    "destinatarios": [
+        {
+            "numerocontrol": "1",
+            "numeroremesa": null,
+            "numeroreferenciacliente": "",
+            "tipoidentificaciondestinatario": "CC",
+            "identificaciondestinatario": "123456789",
+            "sededestinatario": "",
+            "primernombredestinatario": "JULIANA",
+            "segundonombredestinatario": "",
+            "primerapellidodestinatario": "VILLOTA",
+            "segundoapellidodestinatario": "GARZON",
+            "razonsocialdestinatario": "JULIANA VILLOTA GARZON",
+            "contactodestinatario": "",
+            "direcciondestinatario": "DROGUERIA JARDIN CALLE 3A #12A-37 / GRANADA. PASTO (520001). NARINO. PASTO. PASTO",
+            "telefonodestinatario": "3206288962",
+            "ciudaddestino": "GRANADA|META",
+            "formapago": "8",
+            "llevabodega": "false",
+            "recogebodega": "false",
+            "centrocostos": "",
+            "tiposervicio": "TISE_NORMAL_PAQ",
+            "observaciones": "2000015778879292 RUTA:36581",
+            "recaudoproducto": "0",
+            "unidades": [
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "4290R4.2",
+                    "kilosreales": "4",
+                    "largo": "37",
+                    "alto": "13",
+                    "ancho": "36",
+                    "pesovolumen": "",
+                    "valormercancia": "6155",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                },
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "42917G4.1",
+                    "kilosreales": "16",
+                    "largo": "102",
+                    "alto": "12",
+                    "ancho": "30",
+                    "pesovolumen": "",
+                    "valormercancia": "16896",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                },
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "53295Z1",
+                    "kilosreales": "15",
+                    "largo": "109",
+                    "alto": "4",
+                    "ancho": "75",
+                    "pesovolumen": "",
+                    "valormercancia": "55677",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                }
+            ],
+            "documentosreferencia": [
+                {
+                    "tipodocumento": null,
+                    "numerodocumento": null,
+                    "fechadocumento": null
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,92 @@
+{
+    "numerodespacho": "2000015785052436",
+    "fechadespacho": "2026-04-01",
+    "solicitudrecogida": {
+        "numero": null,
+        "fecha": "2026-04-01",
+        "ventanainicio": "2026-04-01T14:00:00",
+        "ventanafin": "2026-04-01T16:00:00"
+    },
+    "unidadnegocio": "1",
+    "cuentaremitente": "1485100",
+    "sederemitente": null,
+    "primernombreremitente": "",
+    "segundonombreremitente": "",
+    "primerapellidoremitente": "",
+    "segundoapellidoremitente": "",
+    "razonsocialremitente": "ABC CARGO EXPRESS SAS",
+    "contactoremitente": "",
+    "tipoidentificacionremitente": "NIT",
+    "identificacionremitente": "900174994-7",
+    "direccionremitente": "AVENIDA CALLE 24 # 95-12  BODEGA 45 PARQUE INDUSTRIAL PORTOS",
+    "ciudadorigen": "11001000",
+    "telefonoremitente": "3223817102",
+    "emailremitente": "EBLANCO@ABCCARGOEXPRESS.COM",
+    "destinatarios": [
+        {
+            "numerocontrol": "1",
+            "numeroremesa": null,
+            "numeroreferenciacliente": "",
+            "tipoidentificaciondestinatario": "CC",
+            "identificaciondestinatario": "123456789",
+            "sededestinatario": "",
+            "primernombredestinatario": "JESSICA",
+            "segundonombredestinatario": "PAOLA",
+            "primerapellidodestinatario": "SANCHEZ",
+            "segundoapellidodestinatario": "CAMPERO",
+            "razonsocialdestinatario": "JESSICA PAOLA SANCHEZ CAMPERO",
+            "contactodestinatario": "",
+            "direcciondestinatario": "DIAGONAL 81 SUR # 45 B 28  BOGOTA- / POTOSI. CIUDAD BOLIVAR (111931). BOGOTA D.C.. CIUDAD BOLIVAR. CIUDAD BOLIVAR",
+            "telefonodestinatario": "3222902518",
+            "ciudaddestino": "CIUDAD BOLIVAR|ANTIOQUIA",
+            "formapago": "8",
+            "llevabodega": "false",
+            "recogebodega": "false",
+            "centrocostos": "",
+            "tiposervicio": "TISE_NORMAL_PAQ",
+            "observaciones": "2000015785052436 RUTA:36584",
+            "recaudoproducto": "0",
+            "unidades": [
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "G20170EM5Z.1",
+                    "kilosreales": "37",
+                    "largo": "175",
+                    "alto": "9",
+                    "ancho": "51",
+                    "pesovolumen": "",
+                    "valormercancia": "108538",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                },
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "G20170EMF9.2",
+                    "kilosreales": "26",
+                    "largo": "100",
+                    "alto": "10",
+                    "ancho": "67",
+                    "pesovolumen": "",
+                    "valormercancia": "132997",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                }
+            ],
+            "documentosreferencia": [
+                {
+                    "tipodocumento": null,
+                    "numerodocumento": null,
+                    "fechadocumento": null
+                }
+            ]
+        }
+    ]
+}

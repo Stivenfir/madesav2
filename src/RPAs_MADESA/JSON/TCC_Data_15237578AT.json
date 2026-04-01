@@ -1,0 +1,76 @@
+{
+    "numerodespacho": "15237578AT",
+    "fechadespacho": "2026-04-01",
+    "solicitudrecogida": {
+        "numero": null,
+        "fecha": "2026-04-01",
+        "ventanainicio": "2026-04-01T14:00:00",
+        "ventanafin": "2026-04-01T16:00:00"
+    },
+    "unidadnegocio": "1",
+    "cuentaremitente": "1485100",
+    "sederemitente": null,
+    "primernombreremitente": "",
+    "segundonombreremitente": "",
+    "primerapellidoremitente": "",
+    "segundoapellidoremitente": "",
+    "razonsocialremitente": "ABC CARGO EXPRESS SAS",
+    "contactoremitente": "",
+    "tipoidentificacionremitente": "NIT",
+    "identificacionremitente": "900174994-7",
+    "direccionremitente": "AVENIDA CALLE 24 # 95-12  BODEGA 45 PARQUE INDUSTRIAL PORTOS",
+    "ciudadorigen": "11001000",
+    "telefonoremitente": "3223817102",
+    "emailremitente": "EBLANCO@ABCCARGOEXPRESS.COM",
+    "destinatarios": [
+        {
+            "numerocontrol": "1",
+            "numeroremesa": null,
+            "numeroreferenciacliente": "",
+            "tipoidentificaciondestinatario": "CC",
+            "identificaciondestinatario": "123456789",
+            "sededestinatario": "",
+            "primernombredestinatario": "LETICIA",
+            "segundonombredestinatario": "",
+            "primerapellidodestinatario": "GOMEZ",
+            "segundoapellidodestinatario": "",
+            "razonsocialdestinatario": "LETICIA GOMEZ",
+            "contactodestinatario": "",
+            "direcciondestinatario": "CALLE 47B # 90B - 19|:=:| LA FLORESTA MEDELLIN 00000  -",
+            "telefonodestinatario": "3103866498",
+            "ciudaddestino": "FLORESTA|BOYACA",
+            "formapago": "8",
+            "llevabodega": "false",
+            "recogebodega": "false",
+            "centrocostos": "",
+            "tiposervicio": "TISE_NORMAL_PAQ",
+            "observaciones": "15237578AT RUTA:36586",
+            "recaudoproducto": "0",
+            "unidades": [
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "104500.C",
+                    "kilosreales": "6",
+                    "largo": "64",
+                    "alto": "4",
+                    "ancho": "54",
+                    "pesovolumen": "",
+                    "valormercancia": "52941",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                }
+            ],
+            "documentosreferencia": [
+                {
+                    "tipodocumento": null,
+                    "numerodocumento": null,
+                    "fechadocumento": null
+                }
+            ]
+        }
+    ]
+}

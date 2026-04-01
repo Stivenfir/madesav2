@@ -1,0 +1,76 @@
+{
+    "numerodespacho": "2000015711124126AT",
+    "fechadespacho": "2026-04-01",
+    "solicitudrecogida": {
+        "numero": null,
+        "fecha": "2026-04-01",
+        "ventanainicio": "2026-04-01T14:00:00",
+        "ventanafin": "2026-04-01T16:00:00"
+    },
+    "unidadnegocio": "1",
+    "cuentaremitente": "1485100",
+    "sederemitente": null,
+    "primernombreremitente": "",
+    "segundonombreremitente": "",
+    "primerapellidoremitente": "",
+    "segundoapellidoremitente": "",
+    "razonsocialremitente": "ABC CARGO EXPRESS SAS",
+    "contactoremitente": "",
+    "tipoidentificacionremitente": "NIT",
+    "identificacionremitente": "900174994-7",
+    "direccionremitente": "AVENIDA CALLE 24 # 95-12  BODEGA 45 PARQUE INDUSTRIAL PORTOS",
+    "ciudadorigen": "11001000",
+    "telefonoremitente": "3223817102",
+    "emailremitente": "EBLANCO@ABCCARGOEXPRESS.COM",
+    "destinatarios": [
+        {
+            "numerocontrol": "1",
+            "numeroremesa": null,
+            "numeroreferenciacliente": "",
+            "tipoidentificaciondestinatario": "CC",
+            "identificaciondestinatario": "123456789",
+            "sededestinatario": "",
+            "primernombredestinatario": "CARO",
+            "segundonombredestinatario": "OSORIO",
+            "primerapellidodestinatario": "BLANCA",
+            "segundoapellidodestinatario": "DENIS",
+            "razonsocialdestinatario": "CARO OSORIO BLANCA DENIS",
+            "contactodestinatario": "",
+            "direcciondestinatario": "CALLE 22 A #14-35 BARRIO SAN VICENTE SAN JERONIMO. N/A  ANTIOQUIA",
+            "telefonodestinatario": "3217746010",
+            "ciudaddestino": "SAN JERONIMO|ANTIOQUIA",
+            "formapago": "8",
+            "llevabodega": "false",
+            "recogebodega": "false",
+            "centrocostos": "",
+            "tiposervicio": "TISE_NORMAL_PAQ",
+            "observaciones": "2000015711124126AT RUTA:36589",
+            "recaudoproducto": "0",
+            "unidades": [
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "11445Z2.2",
+                    "kilosreales": "41",
+                    "largo": "202",
+                    "alto": "6",
+                    "ancho": "65",
+                    "pesovolumen": "",
+                    "valormercancia": "150376",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                }
+            ],
+            "documentosreferencia": [
+                {
+                    "tipodocumento": null,
+                    "numerodocumento": null,
+                    "fechadocumento": null
+                }
+            ]
+        }
+    ]
+}

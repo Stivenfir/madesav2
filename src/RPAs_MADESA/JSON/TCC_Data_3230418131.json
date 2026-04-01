@@ -1,0 +1,92 @@
+{
+    "numerodespacho": "3230418131",
+    "fechadespacho": "2026-04-01",
+    "solicitudrecogida": {
+        "numero": null,
+        "fecha": "2026-04-01",
+        "ventanainicio": "2026-04-01T14:00:00",
+        "ventanafin": "2026-04-01T16:00:00"
+    },
+    "unidadnegocio": "1",
+    "cuentaremitente": "1485100",
+    "sederemitente": null,
+    "primernombreremitente": "",
+    "segundonombreremitente": "",
+    "primerapellidoremitente": "",
+    "segundoapellidoremitente": "",
+    "razonsocialremitente": "ABC CARGO EXPRESS SAS",
+    "contactoremitente": "",
+    "tipoidentificacionremitente": "NIT",
+    "identificacionremitente": "900174994-7",
+    "direccionremitente": "AVENIDA CALLE 24 # 95-12  BODEGA 45 PARQUE INDUSTRIAL PORTOS",
+    "ciudadorigen": "11001000",
+    "telefonoremitente": "3223817102",
+    "emailremitente": "EBLANCO@ABCCARGOEXPRESS.COM",
+    "destinatarios": [
+        {
+            "numerocontrol": "1",
+            "numeroremesa": null,
+            "numeroreferenciacliente": "",
+            "tipoidentificaciondestinatario": "CC",
+            "identificaciondestinatario": "123456789",
+            "sededestinatario": "",
+            "primernombredestinatario": "LUZ",
+            "segundonombredestinatario": "MYRIAM",
+            "primerapellidodestinatario": "MARN",
+            "segundoapellidodestinatario": "SERRATO",
+            "razonsocialdestinatario": "LUZ MYRIAM MARN SERRATO",
+            "contactodestinatario": "",
+            "direcciondestinatario": "CLL 163A  15-20 LOCAL PINTURAS. BARRIO LAS ORQUIDEAS. BOGOTA D.C.. USAQUEN. BOGOTA D.C.. BOGOTA D.C.",
+            "telefonodestinatario": "573007620197",
+            "ciudaddestino": "BOGOTA|CUNDINAMARCA",
+            "formapago": "8",
+            "llevabodega": "false",
+            "recogebodega": "false",
+            "centrocostos": "",
+            "tiposervicio": "TISE_NORMAL_PAQ",
+            "observaciones": "3230418131 RUTA:36580",
+            "recaudoproducto": "0",
+            "unidades": [
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "10935Z.1",
+                    "kilosreales": "36",
+                    "largo": "188",
+                    "alto": "6",
+                    "ancho": "55",
+                    "pesovolumen": "",
+                    "valormercancia": "94337",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                },
+                {
+                    "tipounidad": "TIPO_UND_PAQ",
+                    "tipoempaque": "",
+                    "claseempaque": "CLEM_GRANDE",
+                    "dicecontener": "11935Z.2",
+                    "kilosreales": "46",
+                    "largo": "210",
+                    "alto": "10",
+                    "ancho": "51",
+                    "pesovolumen": "",
+                    "valormercancia": "157457",
+                    "codigobarras": "",
+                    "numerobolsa": "",
+                    "referencias": "",
+                    "unidadesinternas": "1"
+                }
+            ],
+            "documentosreferencia": [
+                {
+                    "tipodocumento": null,
+                    "numerodocumento": null,
+                    "fechadocumento": null
+                }
+            ]
+        }
+    ]
+}
