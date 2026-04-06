@@ -87,15 +87,16 @@ def GraphListItemsUrlByName(nombre_lista="", list_items_url=""):
 
 def SyncPedidoSKUChildren(id_sharepoint_padre=0, numero_pedido="", numero_ruta="", skus="", fields_padre=None):
     V_SKUs = ParseSKUs(skus)
-    if len(V_SKUs)<=1:
-        return False
+    if len(V_SKUs)==0:
+        return []
     Ctx = _GraphListContext(V_Graph[3])
     DColumnas = GraphPet(f"{Ctx['base_url']}/{Ctx['list_id']}/columns?$select=name", Cabecera)
     Columnas = {X.get("name","") for X in DColumnas.get("value", [])}
     if not Columnas:
         LoG.write(f"PEDIDO  {numero_pedido}  :: No se pudieron leer columnas de la lista principal\n")
-        return False
+        return []
     Plantilla = dict(fields_padre) if isinstance(fields_padre, dict) else {}
+    IDsHijos=[]
     for i,sku in enumerate(V_SKUs, start=1):
         Campos = dict(Plantilla)
         if "Title" in Columnas:
@@ -123,8 +124,9 @@ def SyncPedidoSKUChildren(id_sharepoint_padre=0, numero_pedido="", numero_ruta="
         if "error" in Rta:
             LoG.write(f"PEDIDO  {numero_pedido}  :: Error creando hijo SKU '{sku}' en lista principal  ::  {dumps(Rta,ensure_ascii=False)}\n")
         else:
+            IDsHijos.append(int(Rta["id"]))
             LoG.write(f"PEDIDO  {numero_pedido}  :: Hijo SKU '{sku}' creado en lista principal\n")
-    return True
+    return IDsHijos
 
 def GraphPet(url,Cabecera):
     Rta=requests.get(url, headers=Cabecera)
