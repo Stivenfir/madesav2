@@ -15,7 +15,7 @@ for F in Utils.cursor.fetchall():#parametrizando cada registro de WMS
     D["data"][-1]["Ciudades"]     = V[1]
 
     #3. PARAMETRIZAR INFO DE LA MERCA
-    V_SKUs = D["data"][-1]["SKUs"].split(',') if D["data"][-1]["SKUs"] else ''
+    V_SKUs = Utils.ParseSKUs(D["data"][-1]["SKUs"])
     D["data"][-1]["Unidades"]=str(len(V_SKUs))
 
 print(Utils.dumps(D,ensure_ascii=False,default=str))
