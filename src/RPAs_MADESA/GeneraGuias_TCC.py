@@ -93,7 +93,7 @@ for Info in Datos:
     # 4. SE AGREGA INFORMCAION DE LAS UNIDADES        
     try:
         ValorTotal=0
-        SKUs = Info["SKUs"].split(',')
+        SKUs = Utils.ParseSKUs(Info["SKUs"])
         for sku in SKUs:
             D_SKUHijo  = Utils.SQLpet2(sku)
             ValorMerca=int(str(D_SKUHijo["Valor"][0]))//1000

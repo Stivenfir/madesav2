@@ -21,7 +21,7 @@ for F in M:#parametrizando cada registro de WMS
     if Data["NumeroPedido"] in Pedidos:
         Utils.LoG.write(f"PEDIDO  {Data['NumeroPedido']}  :: Previamente registrado")
     else:
-        V_SKUs    = Data["SKUs"].split(',') if Data["SKUs"] else []
+        V_SKUs    = Utils.ParseSKUs(Data["SKUs"])
         V_destino = Utils.InfoDepto(Data["Direccion"])
         ID_SharePoint=0
         Data["NumeroPedido"]  = Data["NumeroPedido"].strip()
@@ -47,7 +47,7 @@ for F in M:#parametrizando cada registro de WMS
                 "Barrio"                  : Data["Barrio"],
                 "Localidad"               : Data["Localidad"],
                 "Unidades"                : Data["Unidades"],
-                "SKU"                     : Data["SKUs"],
+                "SKU"                     : Utils.SKUSharePointText(Data["SKUs"]),
                 "Peso_x0028_KG_x0029_"    : Data["Peso_KG"],
                 "Peso_x0028_VOL_x0029_"   : Data["Peso_VOL"],
                 "Otro"                    : "NO",
@@ -82,6 +82,13 @@ for F in M:#parametrizando cada registro de WMS
                 #input(Rta.text)
         else:
             Data["idSharePoint"] = int(Rta["id"])
+        Utils.SyncPedidoSKUChildren(
+            id_sharepoint_padre=Data["idSharePoint"],
+            numero_pedido=Data["NumeroPedido"],
+            numero_ruta=Data["numero_ruta"],
+            skus=Data["SKUs"],
+            fields_padre=D["fields"]
+        )
         Utils.cursorLite.execute("INSERT INTO InfoPedidos("+','.join([llave for llave in Data])+") VALUES("+','.join(['?' for i in range(0,len(Data))])+")",tuple(Data[llave] for llave in Data))
         Utils.cnxnLite.commit()
     #BarritaLoading.set_description(f"2. INFORMACION CARGADA (PEDIDO  ::  {Data['NumeroPedido']})")
