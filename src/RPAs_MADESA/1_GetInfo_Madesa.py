@@ -21,7 +21,7 @@ for F in M:#parametrizando cada registro de WMS
     if Data["NumeroPedido"] in Pedidos:
         Utils.LoG.write(f"PEDIDO  {Data['NumeroPedido']}  :: Previamente registrado")
     else:
-        V_SKUs    = Data["SKUs"].split(',') if Data["SKUs"] else []
+        V_SKUs    = Utils.ParseSKUs(Data["SKUs"])
         V_destino = Utils.InfoDepto(Data["Direccion"])
         ID_SharePoint=0
         Data["NumeroPedido"]  = Data["NumeroPedido"].strip()
@@ -47,7 +47,7 @@ for F in M:#parametrizando cada registro de WMS
                 "Barrio"                  : Data["Barrio"],
                 "Localidad"               : Data["Localidad"],
                 "Unidades"                : Data["Unidades"],
-                "SKU"                     : Data["SKUs"],
+                "SKU"                     : Utils.SKUSharePointText(Data["SKUs"]),
                 "Peso_x0028_KG_x0029_"    : Data["Peso_KG"],
                 "Peso_x0028_VOL_x0029_"   : Data["Peso_VOL"],
                 "Otro"                    : "NO",
@@ -64,24 +64,48 @@ for F in M:#parametrizando cada registro de WMS
             D["Telefono_cliente"] = int(Data["Telefono1"])
         except:
             D["Telefono_cliente"] = 0
-        Rta=Utils.requests.post(Utils.V_Graph[3],headers=Utils.Cabecera,json=D).json()
-        print(Utils.dumps(Rta,indent=4))
-        print("\n")
         Data["Peso_KG"]  = round(float(Data["Peso_KG"]))
         Data["Peso_VOL"] = round(float(Data["Peso_VOL"]))
-        if "error" in Rta and Rta["error"]["message"]=="One or more fields with unique constraints already has the provided value.":
-            params = {
-                "$filter": f"fields/Numero_pedido eq '{Data['NumeroPedido']}'",
-                "$select": "id,fields"
-            }
-            Data["idSharePoint"] = int((Utils.requests.get(Utils.V_Graph[3],headers=Utils.Cabecera,params=params).json())["value"][0]["id"])
-            Rta=Utils.GraphPet(f"{Utils.V_Graph[3]}/{ Data['idSharePoint']}?expand=fields",Utils.Cabecera)["fields"]
-            if ("Departamento" not in Rta and "Ciudades" not in Rta) or ("Departamento" in Rta and len(Rta["Departamento"])<4) or ("Ciudades" in Rta and len(Rta["Ciudades"])<4):
-                Data0={"Departamento":Data["Departamento"],"Ciudades":Data["Ciudades"]}
-                Rta=Utils.requests.patch(f"{Utils.V_Graph[3]}/{ Data['idSharePoint']}/fields",headers=Utils.Cabecera,json=Data0)
-                #input(Rta.text)
+
+        if len(V_SKUs)>1:
+            IDsHijos = Utils.SyncPedidoSKUChildren(
+                id_sharepoint_padre=0,
+                numero_pedido=Data["NumeroPedido"],
+                numero_ruta=Data["numero_ruta"],
+                skus=Data["SKUs"],
+                fields_padre=D["fields"]
+            )
+            if len(IDsHijos)>0:
+                Data["idSharePoint"] = IDsHijos[0]
+            else:
+                Rta=Utils.requests.post(Utils.V_Graph[3],headers=Utils.Cabecera,json=D).json()
+                print(Utils.dumps(Rta,indent=4))
+                print("\n")
+                if "error" in Rta and Rta["error"]["message"]=="One or more fields with unique constraints already has the provided value.":
+                    params = {
+                        "$filter": f"fields/Numero_pedido eq '{Data['NumeroPedido']}'",
+                        "$select": "id,fields"
+                    }
+                    Data["idSharePoint"] = int((Utils.requests.get(Utils.V_Graph[3],headers=Utils.Cabecera,params=params).json())["value"][0]["id"])
+                else:
+                    Data["idSharePoint"] = int(Rta["id"])
         else:
-            Data["idSharePoint"] = int(Rta["id"])
+            Rta=Utils.requests.post(Utils.V_Graph[3],headers=Utils.Cabecera,json=D).json()
+            print(Utils.dumps(Rta,indent=4))
+            print("\n")
+            if "error" in Rta and Rta["error"]["message"]=="One or more fields with unique constraints already has the provided value.":
+                params = {
+                    "$filter": f"fields/Numero_pedido eq '{Data['NumeroPedido']}'",
+                    "$select": "id,fields"
+                }
+                Data["idSharePoint"] = int((Utils.requests.get(Utils.V_Graph[3],headers=Utils.Cabecera,params=params).json())["value"][0]["id"])
+                Rta=Utils.GraphPet(f"{Utils.V_Graph[3]}/{ Data['idSharePoint']}?expand=fields",Utils.Cabecera)["fields"]
+                if ("Departamento" not in Rta and "Ciudades" not in Rta) or ("Departamento" in Rta and len(Rta["Departamento"])<4) or ("Ciudades" in Rta and len(Rta["Ciudades"])<4):
+                    Data0={"Departamento":Data["Departamento"],"Ciudades":Data["Ciudades"]}
+                    Rta=Utils.requests.patch(f"{Utils.V_Graph[3]}/{ Data['idSharePoint']}/fields",headers=Utils.Cabecera,json=Data0)
+                    #input(Rta.text)
+            else:
+                Data["idSharePoint"] = int(Rta["id"])
         Utils.cursorLite.execute("INSERT INTO InfoPedidos("+','.join([llave for llave in Data])+") VALUES("+','.join(['?' for i in range(0,len(Data))])+")",tuple(Data[llave] for llave in Data))
         Utils.cnxnLite.commit()
     #BarritaLoading.set_description(f"2. INFORMACION CARGADA (PEDIDO  ::  {Data['NumeroPedido']})")

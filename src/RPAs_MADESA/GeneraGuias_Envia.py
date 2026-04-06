@@ -47,7 +47,7 @@ else:
         Info["Peso_KG"]=int(Info["Peso_KG"])+(Info["Peso_KG"]>int(Info["Peso_KG"]))
         Info["Valoracion"] = 0
         Info["Peso_VOL"]   = 0
-        SKUs         = Info["SKUs"].split(',')
+        SKUs         = Utils.ParseSKUs(Info["SKUs"])
     
         try:
             sku=""

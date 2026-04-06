@@ -13,6 +13,7 @@
 
 import os
 import sys
+import re
 import pyodbc
 import sqlite3
 import requests
@@ -52,6 +53,80 @@ cursorLite.execute("SELECT * FROM SharePoint_CheckPoint")
 V_Graph=cursorLite.fetchone() #[id,NombreLista,token,url]
 Cabecera={"Authorization": f"Bearer " + V_Graph[2]}
 D_Volaces={"Á":"A","É":"E","Í":"I","Ó":"O","Ú":"U"}
+
+def ParseSKUs(SKUtxt=""):
+    if SKUtxt is None:
+        return []
+    if not isinstance(SKUtxt, str):
+        SKUtxt = str(SKUtxt)
+    SKUtxt = SKUtxt.replace("\r\n", "\n").replace(";", ",").replace("\n", ",")
+    return [sku.strip() for sku in SKUtxt.split(",") if sku and sku.strip()]
+
+def SKUSharePointText(SKUtxt=""):
+    return "\n".join(ParseSKUs(SKUtxt))
+
+def _GraphListContext(list_items_url=""):
+    M = re.search(r"/sites/([^/]+)/lists/([^/]+)/items", str(list_items_url))
+    if not M:
+        return None
+    return {
+        "site_id": M.group(1),
+        "list_id": M.group(2),
+        "base_url": f"https://graph.microsoft.com/v1.0/sites/{M.group(1)}/lists"
+    }
+
+def GraphListItemsUrlByName(nombre_lista="", list_items_url=""):
+    Ctx = _GraphListContext(list_items_url)
+    if not Ctx or not nombre_lista:
+        return ""
+    Rta = GraphPet(Ctx["base_url"], Cabecera)
+    for data in Rta.get("value", []):
+        if data.get("name", "").strip().upper() == nombre_lista.strip().upper():
+            return f"{Ctx['base_url']}/{data['id']}/items"
+    return ""
+
+def SyncPedidoSKUChildren(id_sharepoint_padre=0, numero_pedido="", numero_ruta="", skus="", fields_padre=None):
+    V_SKUs = ParseSKUs(skus)
+    if len(V_SKUs)==0:
+        return []
+    Ctx = _GraphListContext(V_Graph[3])
+    DColumnas = GraphPet(f"{Ctx['base_url']}/{Ctx['list_id']}/columns?$select=name", Cabecera)
+    Columnas = {X.get("name","") for X in DColumnas.get("value", [])}
+    if not Columnas:
+        LoG.write(f"PEDIDO  {numero_pedido}  :: No se pudieron leer columnas de la lista principal\n")
+        return []
+    Plantilla = dict(fields_padre) if isinstance(fields_padre, dict) else {}
+    IDsHijos=[]
+    for i,sku in enumerate(V_SKUs, start=1):
+        Campos = dict(Plantilla)
+        if "Title" in Columnas:
+            Campos["Title"] = f"{numero_pedido}-SKU-{i}"
+        if "Numero_pedido" in Columnas:
+            Campos["Numero_pedido"] = f"{numero_pedido}-SKU-{i}"
+        if "SKU" in Columnas:
+            Campos["SKU"] = sku
+        if "Ruta" in Columnas:
+            Campos["Ruta"] = str(numero_ruta)
+        if "Unidades" in Columnas:
+            Campos["Unidades"] = "1"
+        if "Relacionado" in Columnas:
+            Campos["Relacionado"] = str(id_sharepoint_padre)
+        if "LLave" in Columnas:
+            Campos["LLave"] = str(numero_pedido)
+        if "Operacion" in Columnas:
+            Campos["Operacion"] = "SKU_HIJO"
+        if "Detalle_operacion2" in Columnas:
+            Campos["Detalle_operacion2"] = str(id_sharepoint_padre)
+        if "Estado" in Columnas:
+            Campos["Estado"] = "Creado"
+        D = {"fields": Campos}
+        Rta = requests.post(V_Graph[3], headers=Cabecera, json=D).json()
+        if "error" in Rta:
+            LoG.write(f"PEDIDO  {numero_pedido}  :: Error creando hijo SKU '{sku}' en lista principal  ::  {dumps(Rta,ensure_ascii=False)}\n")
+        else:
+            IDsHijos.append(int(Rta["id"]))
+            LoG.write(f"PEDIDO  {numero_pedido}  :: Hijo SKU '{sku}' creado en lista principal\n")
+    return IDsHijos
 
 def GraphPet(url,Cabecera):
     Rta=requests.get(url, headers=Cabecera)
@@ -100,12 +175,21 @@ def SQLpet2(V_SKUHijos):#los SKU-Hijos son los articulos, se entrega la informac
 
     V_SKUs=[]#1. Organizar todos los SKU en una lista
     if not V_SKUHijos or not isinstance(V_SKUHijos, list):
-        V_SKUs=[str(V_SKUHijos)]
+        V_SKUs=ParseSKUs(V_SKUHijos)
     else:
         for grupo in V_SKUHijos:
-            V=grupo.split(",")
-            for X in V:
+            for X in ParseSKUs(grupo):
                 V_SKUs.append(X)
+    if len(V_SKUs)==0:
+        return {
+            "Hijo":np.array([],dtype='U'),
+            "EAN":np.array([],dtype='U'),
+            "Ancho_cm":np.array([],dtype=np.uint64),
+            "Alto_cm":np.array([],dtype=np.uint64),
+            "Largo_cm":np.array([],dtype=np.uint64),
+            "Peso":[],
+            "Valor":[]
+        }
     Interrogantes = ','.join('?' for _ in V_SKUs)#Consultar la información de los SKU's en cuestión
     cursor.execute(f"SELECT * FROM MADESA_SKUHijo WHERE Hijo in ({Interrogantes})",V_SKUs)
     M=cursor.fetchall()
